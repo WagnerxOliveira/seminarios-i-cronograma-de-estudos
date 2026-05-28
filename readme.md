@@ -35,5 +35,5 @@ O projeto foi construído sob a premissa de *Clean Code* e *Zero Dependencies*, 
 Sendo uma aplicação estática *client-side*, a execução é imediata e não requer a instalação de módulos ou servidores Node.js.
 
 1. Faça o clone do repositório:
-   ```bash
-   git clone [https://github.com/WagnerxOliveira/seminarios-i-cronograma-de-estudos.git]
+```bash
+   git clone [https://github.com/WagnerxOliveira/seminarios-i-cronograma-de-estudos.git](https://github.com/WagnerxOliveira/seminarios-i-cronograma-de-estudos.git)
