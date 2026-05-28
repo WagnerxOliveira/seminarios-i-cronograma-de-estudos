@@ -3,51 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SysAgent | Mentor Neuropedagógico</title>
+    <title>SysAgent | Neuropedagogia & Alta Performance</title>
     <style>
-        /* === ESTILIZAÇÃO E DINAMISMO (CSS Moderno) === */
+        /* =========================================
+           CSS MODERNO: VARIÁVEIS, TEMAS E DESIGN SYSTEM
+           ========================================= */
         :root {
+            /* Paleta de Cores (Dark Mode Nativo) */
             --bg-base: #0f172a;
             --bg-surface: #1e293b;
             --bg-elevated: #334155;
             --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
-            --accent-primary: #38bdf8;
-            --accent-secondary: #818cf8;
-            --accent-tertiary: #10b981;
-            --accent-danger: #ef4444;
+            
+            /* Cores de Destaque */
+            --accent-primary: #38bdf8; /* Azul Tech */
+            --accent-secondary: #818cf8; /* Roxo Intermediário */
+            --accent-tertiary: #10b981; /* Verde Sucesso */
+            --accent-danger: #ef4444; /* Vermelho Alerta */
+            
+            /* Espaçamentos e Bordas */
             --radius-md: 8px;
             --radius-lg: 16px;
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Reset Básico */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-base);
             color: var(--text-primary);
-            display: flex;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Estrutura Semântica - Flexbox e Grid */
+        /* =========================================
+           LAYOUT: FLEXBOX E CSS GRID RESPONSIVOS
+           ========================================= */
         .app-layout {
             display: flex;
-            width: 100%;
             flex-direction: column;
+            width: 100%;
         }
 
         @media (min-width: 1024px) {
             .app-layout { flex-direction: row; }
         }
 
-        /* Menu Lateral Semântico */
+        /* --- ASIDE: Barra Lateral Semântica --- */
         aside.sidebar {
             width: 100%;
             background-color: var(--bg-surface);
@@ -56,20 +65,25 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
-            flex-shrink: 0;
             z-index: 10;
         }
 
         @media (min-width: 1024px) {
-            aside.sidebar { width: 340px; position: sticky; top: 0; height: 100vh; }
+            aside.sidebar {
+                width: 350px;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
         }
 
-        header.agent-header h1 {
-            font-size: 1.5rem;
+        .agent-header h1 {
+            font-size: 1.6rem;
             color: var(--accent-primary);
             margin-bottom: 4px;
         }
 
+        /* Pseudo-classes e Navegação */
         nav.main-nav ul {
             list-style: none;
             display: flex;
@@ -77,7 +91,6 @@
             gap: 8px;
         }
 
-        /* Pseudo-classes e interações */
         .nav-btn {
             width: 100%;
             text-align: left;
@@ -102,16 +115,16 @@
         }
 
         .nav-btn[data-state="active"] {
-            background-color: rgba(56, 189, 248, 0.1);
+            background-color: rgba(56, 189, 248, 0.15);
             color: var(--accent-primary);
             border-left: 4px solid var(--accent-primary);
         }
 
-        /* Agente Pomodoro Integrado */
+        /* Widget Pomodoro (Estados e Efeitos) */
         section.agent-widget {
             margin-top: auto;
             background-color: var(--bg-base);
-            padding: 20px;
+            padding: 24px;
             border-radius: var(--radius-lg);
             border: 1px solid var(--bg-elevated);
             text-align: center;
@@ -119,18 +132,14 @@
 
         .timer-display {
             font-size: 3.5rem;
-            font-family: monospace;
+            font-family: 'Courier New', Courier, monospace;
             font-weight: 700;
             color: var(--accent-tertiary);
             margin: 16px 0;
             letter-spacing: -2px;
         }
 
-        .controls {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-        }
+        .controls { display: flex; gap: 8px; justify-content: center; }
 
         .btn-core {
             padding: 10px 20px;
@@ -144,8 +153,10 @@
 
         .btn-core:active { transform: scale(0.95); }
         .btn-core:disabled { opacity: 0.5; cursor: not-allowed; }
+        
         .btn-start { background-color: var(--accent-tertiary); }
         .btn-start:hover:not(:disabled) { background-color: #059669; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+        
         .btn-reset { background-color: var(--bg-elevated); color: var(--text-primary); }
         .btn-reset:hover { background-color: var(--accent-danger); }
 
@@ -157,11 +168,11 @@
             color: var(--text-secondary);
         }
 
-        /* Área Principal de Conteúdo */
+        /* --- MAIN: Área Principal --- */
         main.content-area {
             flex: 1;
             padding: 24px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -169,33 +180,38 @@
             main.content-area { padding: 48px; }
         }
 
-        /* Animações (Keyframes) */
-        @keyframes slideFade {
+        /* =========================================
+           ANIMAÇÕES KEYFRAMES (CSS Nativo)
+           ========================================= */
+        @keyframes slideFadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .panel-view {
             display: none;
-            animation: slideFade 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: slideFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .panel-view[data-state="active"] {
-            display: block;
-        }
+        .panel-view[data-state="active"] { display: block; }
 
-        /* Seletor de Folgas Horizontal */
+        /* --- Componentes do Cronograma --- */
+        .view-header { margin-bottom: 32px; }
+        .view-header h2 { font-size: 2.2rem; color: var(--text-primary); }
+        .view-header p { color: var(--text-secondary); font-size: 1.1rem; margin-top: 8px; }
+
+        /* Carousel Horizontal para os Dias de Folga */
         nav.days-track {
             display: flex;
             gap: 12px;
             overflow-x: auto;
             padding-bottom: 16px;
-            margin: 32px 0;
+            margin-bottom: 32px;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-primary) var(--bg-elevated);
         }
 
-        nav.days-track::-webkit-scrollbar { height: 6px; }
+        nav.days-track::-webkit-scrollbar { height: 8px; }
         nav.days-track::-webkit-scrollbar-track { background: var(--bg-elevated); border-radius: 10px; }
         nav.days-track::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 10px; }
 
@@ -212,10 +228,11 @@
 
         .day-tab:hover, .day-tab[data-selected="true"] {
             border-color: var(--accent-secondary);
-            background-color: rgba(129, 140, 248, 0.1);
+            background-color: rgba(129, 140, 248, 0.15);
+            transform: translateY(-2px);
         }
 
-        /* Estrutura do Cronograma (Grid) */
+        /* CSS Grid para estruturar Timeline vs Contexto */
         .schedule-grid {
             display: grid;
             gap: 24px;
@@ -225,7 +242,8 @@
             .schedule-grid { grid-template-columns: 2fr 1fr; }
         }
 
-        article.timeline-container {
+        /* Lista da Timeline */
+        .timeline-container {
             background-color: var(--bg-surface);
             border-radius: var(--radius-lg);
             border: 1px solid var(--bg-elevated);
@@ -241,7 +259,7 @@
             gap: 32px;
         }
 
-        /* Cards de Estudo e Resumos */
+        /* Estilização dos Cards (Pseudo-elementos ::before) */
         .study-card {
             position: relative;
             background-color: var(--bg-base);
@@ -249,14 +267,16 @@
             border-radius: var(--radius-md);
             padding: 24px;
             transition: var(--transition-smooth);
+            opacity: 0;
+            animation: slideFadeIn 0.4s ease forwards;
         }
 
         .study-card:hover {
             border-color: var(--accent-primary);
             box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            transform: translateY(-2px);
         }
 
+        /* Bolinha da Timeline feita com CSS puro */
         .study-card::before {
             content: '';
             position: absolute;
@@ -278,16 +298,10 @@
             color: var(--accent-primary);
             font-weight: 700;
             font-size: 0.9rem;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             background-color: rgba(56, 189, 248, 0.1);
             padding: 4px 12px;
             border-radius: 20px;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: 12px;
         }
 
         .card-summary {
@@ -301,19 +315,14 @@
             border-radius: 0 var(--radius-md) var(--radius-md) 0;
         }
 
-        /* Links de Material */
-        .material-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        /* Botões de Links */
         .link-group h4 {
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            margin-top: 16px;
         }
 
         .link-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -337,17 +346,13 @@
         .btn-yt { background-color: rgba(249, 115, 22, 0.1); color: #fdba74; border-color: rgba(249, 115, 22, 0.2); }
         .btn-yt:hover { background-color: rgba(249, 115, 22, 0.2); color: #fff; }
 
-        /* Asides / Context Cards */
+        /* --- ASIDE: Contexto e Dicas --- */
         .context-sidebar { display: flex; flex-direction: column; gap: 24px; }
-        
-        article.context-card {
-            background-color: var(--bg-surface);
-            padding: 24px;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--bg-elevated);
-        }
+        .context-card { background-color: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--bg-elevated); }
 
-        /* APIs Nativas HTML5 (<details> e <dialog>) */
+        /* =========================================
+           APIs NATIVAS DO HTML5 (<details> e <dialog>)
+           ========================================= */
         details.method-item {
             background-color: var(--bg-surface);
             border: 1px solid var(--bg-elevated);
@@ -361,10 +366,9 @@
             font-weight: bold;
             color: var(--accent-secondary);
             cursor: pointer;
-            list-style: none;
+            list-style: none; /* Remove seta padrão */
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
         details.method-item summary::-webkit-details-marker { display: none; }
@@ -377,6 +381,7 @@
             line-height: 1.6;
         }
 
+        /* Modal Nativo Otimizado */
         dialog.native-modal {
             margin: auto;
             padding: 32px;
@@ -389,7 +394,7 @@
         }
 
         dialog.native-modal::backdrop {
-            background-color: rgba(15, 23, 42, 0.8);
+            background-color: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(4px);
         }
     </style>
@@ -397,101 +402,92 @@
 <body>
 
     <div class="app-layout">
-        <!-- HEADER / NAV (HTML Semântico) -->
         <aside class="sidebar">
             <header class="agent-header">
-                <h1>SysAgent Neuropedagógico</h1>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Escala 12x36 Otimizada</p>
+                <h1>SysAgent</h1>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Mentor Neuropedagógico 12x36</p>
             </header>
 
-            <nav class="main-nav" aria-label="Navegação Principal">
+            <nav class="main-nav" aria-label="Navegação Principal do Sistema">
                 <ul>
-                    <li><button class="nav-btn" data-target="schedule" data-state="active">📅 Cronograma de Folgas</button></li>
-                    <li><button class="nav-btn" data-target="methodology" data-state="inactive">🧠 Método R.E.A.L.</button></li>
+                    <li><button class="nav-btn" data-target="schedule" data-state="active">📅 Matriz de Execução</button></li>
+                    <li><button class="nav-btn" data-target="methodology" data-state="inactive">🧠 Protocolo R.E.A.L.</button></li>
                 </ul>
             </nav>
 
-            <section class="agent-widget" aria-label="Timer Pomodoro">
-                <h3 style="font-size: 1.1rem; color: var(--text-primary);">Ciclo de Foco (50/10)</h3>
+            <section class="agent-widget" aria-label="Timer Pomodoro (50/10)">
+                <h3 style="font-size: 1.1rem; color: var(--text-primary);">Foco Profundo (50/10)</h3>
                 <div class="timer-display" id="timerOutput" aria-live="polite">50:00</div>
                 <div class="controls">
                     <button class="btn-core btn-start" id="btnStartTimer">Iniciar Imersão</button>
                     <button class="btn-core btn-reset" id="btnResetTimer">Zerar</button>
                 </div>
                 <div class="stats-panel">
-                    Carga cognitiva acumulada:<br>
-                    <strong style="color: var(--accent-tertiary); font-size: 1.2rem;"><span id="focusMinutes">0</span> minutos</strong>
+                    Carga cognitiva consolidada:<br>
+                    <strong style="color: var(--accent-tertiary); font-size: 1.2rem;"><span id="focusMinutes">0</span> Minutos</strong>
                 </div>
             </section>
         </aside>
 
-        <!-- MAIN (Conteúdo Principal) -->
         <main class="content-area">
             
-            <!-- SECÃO: CRONOGRAMA -->
             <section id="schedule" class="panel-view" data-state="active">
-                <header style="margin-bottom: 24px;">
-                    <h2 style="font-size: 2.2rem; color: var(--text-primary);">Matriz de Operações Diárias</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">Selecione a data da sua folga para carregar o protocolo de estudos, materiais e resumos estruturados.</p>
+                <header class="view-header">
+                    <h2>Mapeamento de Folgas e Acadêmico</h2>
+                    <p>O algoritmo consolidou sua escala 12x36. Selecione o dia para compilar os materiais necessários.</p>
                 </header>
 
-                <nav class="days-track" id="daysTrackContainer" aria-label="Seletor de Datas">
-                    <!-- Gerado dinamicamente via JS -->
-                </nav>
+                <nav class="days-track" id="daysTrackContainer" aria-label="Dias de Folga Computados">
+                    </nav>
 
                 <div class="schedule-grid">
                     <article class="timeline-container">
-                        <h3 id="currentDateHeader" style="color: var(--accent-primary); margin-bottom: 32px; font-size: 1.5rem;">Carregando Protocolo...</h3>
+                        <h3 id="currentDateHeader" style="color: var(--accent-primary); margin-bottom: 32px; font-size: 1.5rem;">Carregando Interface...</h3>
                         <div class="timeline-list" id="timelineList">
-                            <!-- Cards injetados via JS -->
-                        </div>
+                            </div>
                     </article>
 
                     <aside class="context-sidebar">
                         <article class="context-card">
-                            <h3 style="color: var(--accent-secondary); margin-bottom: 16px;">Agente Mentor (Live API)</h3>
+                            <h3 style="color: var(--accent-secondary); margin-bottom: 16px;">Agente Fetch (API Externa)</h3>
                             <blockquote id="apiMotivation" style="font-style: italic; color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent-secondary); padding-left: 12px;">
-                                Estabelecendo conexão com o servidor de inteligência...
+                                Acessando servidor de inteligência...
                             </blockquote>
                         </article>
                         
                         <article class="context-card">
-                            <h3 style="color: var(--accent-tertiary); margin-bottom: 16px;">Ancoragem Técnica (Contexto)</h3>
+                            <h3 style="color: var(--accent-tertiary); margin-bottom: 16px;">Arquitetura de Hardware</h3>
                             <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                                O seu hardware atual e monitor operam perfeitamente para testes emulados. Utilize os blocos da tarde de Engenharia Reversa para abrir os binários de Tony Hawk's Pro Skater 2 no jpsxdec e visualizar as estruturas MIPS diretamente no Ghidra, ancorando a teoria da manhã (Arquitetura II).
+                                O processador i5-8400 é excelente para a descompactação rápida de binários de jogos. Utilize o monitor 144Hz para notar frames não renderizados ao realizar o depuramento (debug) no DuckStation após a injeção do código hexadecimal, consolidando o conhecimento da aula noturna.
                             </p>
                         </article>
                     </aside>
                 </div>
             </section>
 
-            <!-- SEÇÃO: METODOLOGIA -->
             <section id="methodology" class="panel-view" data-state="inactive">
-                <header style="margin-bottom: 32px;">
-                    <h2 style="font-size: 2.2rem; color: var(--text-primary);">Neuropedagogia Aplicada</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">A ciência da consolidação de memória estruturada para quem trabalha em escalas exaustivas.</p>
+                <header class="view-header">
+                    <h2>Protocolo de Retenção Neural</h2>
+                    <p>Aplicando ciência da computação e neuropedagogia para contornar a fadiga do plantão.</p>
                 </header>
 
                 <article>
-                    <!-- APIs Nativas do HTML5: Details e Summary -->
                     <details class="method-item" open>
-                        <summary>1. Despertar Estratégico & Gestão de Fadiga (07h30)</summary>
+                        <summary>1. Boot Cognitivo (07h30)</summary>
                         <div class="detail-content">
-                            A escala 12x36 sobrecarrega o sistema nervoso central. Acordando às 07h30 na folga, o córtex pré-frontal está limpo de decisões. <strong>Regra de ouro:</strong> Inicie o dia exclusivamente com disciplinas abstratas (Arquitetura, Criptografia, Filosofia). O cérebro consome mais glicose para abstrações teóricas do que para tarefas práticas como programar ou extrair arquivos de jogos.
+                            A escala 12x36 drena a capacidade de tomada de decisões. Ao acordar, seu córtex pré-frontal está limpo. Esta é a janela ideal para absorver tópicos abstratos e matemáticos densos (Arquitetura de Computadores II e Criptografia DFIR).
                         </div>
                     </details>
-
                     <details class="method-item">
                         <summary>2. Prática Intercalada (Interleaving)</summary>
                         <div class="detail-content">
-                            A ilusão de fluência ocorre quando você estuda o mesmo tópico o dia inteiro (ex: passar 8 horas lendo código Assembly). O cronograma divide o dia em blocos distintos: Teoria de manhã, Modding/PSX à tarde e Aula Noturna. Alternar contextos força o cérebro a recuperar os protocolos de memória repetidamente, fortalecendo as sinapses a longo prazo.
+                            Estudar o mesmo assunto o dia inteiro gera a "Ilusão de Fluência". O sistema divide o dia mudando o contexto drasticamente: da Teoria de Hardware (Manhã) para a Prática com Emuladores e Modding (Tarde), finalizando com a Aula Presencial (Noite). Essa quebra constante força a recuperação sináptica.
                         </div>
                     </details>
-
                     <details class="method-item">
-                        <summary>3. Evocação Ativa (Active Recall)</summary>
+                        <summary>3. Evocação Ativa e Descanso Visual</summary>
                         <div class="detail-content">
-                            Ler um PDF passivamente não gera retenção. Durante o ciclo Pomodoro de 50 minutos, pare nos últimos 10 minutos. Feche o PDF, pause o YouTube, e explique em voz alta (ou rascunhe num bloco de notas) o que acabou de aprender sobre fragmentação de datagramas ou a arquitetura MIPS. O esforço cognitivo para lembrar é o que constrói o conhecimento.
+                            <strong>No ciclo Pomodoro (50/10):</strong> Estude 50 minutos ininterruptos. Nos 10 minutos de pausa, feche as abas. Explique em voz alta o que compreendeu do material lido. Mais importante: afaste-se do monitor. A memória de longo prazo é consolidada na pausa, não durante a leitura ativa.
                         </div>
                     </details>
                 </article>
@@ -499,170 +495,182 @@
         </main>
     </div>
 
-    <!-- Modais Nativos HTML5 -->
     <dialog id="welcomeDialog" class="native-modal">
-        <h2 style="color: var(--accent-primary); margin-bottom: 16px;">Sistemas Operacionais Prontos</h2>
+        <h2 style="color: var(--accent-primary); margin-bottom: 16px;">Sistemas Operacionais Otimizados</h2>
         <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
-            Sua matriz de escala 12x36 foi processada. O algoritmo mapeou todos os seus dias de folga (dias pares no final de Maio, e todos os dias ímpares de Junho). Os links, resumos e PDFs já estão alocados para otimizar sua transição do plantão para a academia.
+            A estrutura analisou sua escala. Os dias trabalhados (ímpares de maio, pares de junho) foram isolados. Seus dias de folga (28/05, 30/05 e os ímpares de junho) foram pré-compilados com resumos, PDFs e múltiplas aulas do YouTube.
         </p>
-        <button id="btnCloseDialog" class="btn-core btn-start" style="width: 100%;">Acessar Dashboard</button>
+        <button id="btnCloseDialog" class="btn-core btn-start" style="width: 100%;">Conectar ao Servidor Local</button>
     </dialog>
 
-    <!-- === INTERATIVIDADE E LÓGICA (JavaScript) === -->
     <script>
         /**
-         * BANCO DE DADOS: Materiais de Estudo
-         * Estrutura contendo o resumo explicativo, link em PDF e múltiplos links de YouTube.
+         * 1. BANCO DE DADOS (JSON Structure)
+         * Mapeamento minucioso dos resumos táticos e múltiplos links (PDFs e YouTube)
          */
         const studyResources = {
-            arq: {
-                summary: "Neste bloco, o foco é compreender a hierarquia de memória e o pipeline de execução dos processadores. A teoria lida aqui é a base matemática e física de como o hardware do seu PC e do PlayStation processam instruções em baixo nível.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Arquitetura+e+Organiza%C3%A7%C3%A3o+de+Computadores+Pipeline",
+            arqOrg: {
+                summary: "Fundamentação Teórica. Abordagem sobre o fluxo de datagramas, pipeline de execução e como a CPU gerencia a hierarquia de memória cache.",
+                pdfs: [
+                    { title: "Livro Texto: Stallings (PDF)", url: "https://www.google.com/search?q=filetype:pdf+Arquitetura+e+Organiza%C3%A7%C3%A3o+de+Computadores+Stallings" },
+                    { title: "Resumo: Pipeline e Processadores", url: "https://www.google.com/search?q=filetype:pdf+Pipeline+Arquitetura+de+Computadores" }
+                ],
                 vids: [
-                    { title: "Pipeline e Hazards Explicados", url: "https://www.youtube.com/results?search_query=Pipeline+Arquitetura+de+Computadores" },
-                    { title: "Memória Cache na Prática", url: "https://www.youtube.com/results?search_query=Memoria+Cache+Mapeamento" }
+                    { title: "Vídeo 1: Pipeline e Hazards Explicados", url: "https://www.youtube.com/results?search_query=Pipeline+Arquitetura+de+Computadores" },
+                    { title: "Vídeo 2: Memória Cache na Prática", url: "https://www.youtube.com/results?search_query=Memoria+Cache+Mapeamento" },
+                    { title: "Vídeo 3: Modelo OSI e Datagramas", url: "https://www.youtube.com/results?search_query=Fragmenta%C3%A7%C3%A3o+de+Datagramas+Redes" }
                 ]
             },
             labArq: {
-                summary: "Hora de aplicar a lógica abstrata. O estudo do Assembly MIPS permitirá que você entenda exatamente o que os registradores ($v0, $a0, etc.) estão armazenando. Isso é o coração do processo de Engenharia Reversa.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Linguagem+Assembly+MIPS+Instru%C3%A7%C3%B5es",
+                summary: "Aplicação da Lógica. O estudo do Assembly MIPS é a base que permite a compreensão e manipulação do código durante a Engenharia Reversa de jogos.",
+                pdfs: [
+                    { title: "Manual Prático: Assembly MIPS", url: "https://www.google.com/search?q=filetype:pdf+Linguagem+Assembly+MIPS+Instru%C3%A7%C3%B5es" }
+                ],
                 vids: [
-                    { title: "Tutorial Prático de MIPS", url: "https://www.youtube.com/results?search_query=Assembly+MIPS+Tutorial+Pratico" },
-                    { title: "Entendendo Opcodes no Ghidra", url: "https://www.youtube.com/results?search_query=Ghidra+MIPS+Assembly+An%C3%A1lise" }
+                    { title: "Vídeo 1: Curso de MIPS Prático", url: "https://www.youtube.com/results?search_query=Assembly+MIPS+Tutorial+Pratico" },
+                    { title: "Vídeo 2: Opcodes e Ghidra", url: "https://www.youtube.com/results?search_query=Ghidra+MIPS+Assembly+An%C3%A1lise" }
                 ]
             },
             filosofia: {
-                summary: "Desenvolvimento do pensamento crítico. Analisar os textos de Kant e Descartes melhora sua capacidade argumentativa e abstração lógica, qualidades essenciais para a resolução de algoritmos complexos.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Filosofia+Raz%C3%A3o+e+Modernidade+Descartes",
+                summary: "Raciocínio Crítico. A filosofia moderna molda o pensamento analítico necessário para debugar códigos e estruturar a arquitetura de softwares de grande porte.",
+                pdfs: [
+                    { title: "Fichamento: Razão e Modernidade", url: "https://www.google.com/search?q=filetype:pdf+Filosofia+Raz%C3%A3o+e+Modernidade+Descartes" }
+                ],
                 vids: [
-                    { title: "Racionalismo na Modernidade", url: "https://www.youtube.com/results?search_query=Filosofia+Moderna+Racionalismo" },
-                    { title: "O Método Cartesiano", url: "https://www.youtube.com/results?search_query=Metodo+Cartesiano+Descartes+Resumo" }
+                    { title: "Vídeo 1: Racionalismo (Descartes)", url: "https://www.youtube.com/results?search_query=Filosofia+Moderna+Racionalismo" },
+                    { title: "Vídeo 2: Criticismo Kantiano", url: "https://www.youtube.com/results?search_query=Kant+Critica+da+Razao+Pura+Resumo" }
                 ]
             },
             tai: {
-                summary: "Foco na estruturação de software e pesquisa científica. Utilizar normas ABNT para criar a documentação do projeto, seguida da estruturação do código frontend (HTML/CSS/JS) de forma limpa e semântica.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Metodologia+Cientifica+ABNT+Projetos",
+                summary: "Estruturação de Projetos e Frontend. O Trabalho Acadêmico Integrado exige rigor na documentação ABNT e a construção de interfaces Web limpas usando HTML, CSS e JavaScript.",
+                pdfs: [
+                    { title: "Manual Oficial Normas ABNT", url: "https://www.google.com/search?q=filetype:pdf+Metodologia+Cientifica+ABNT+Projetos" },
+                    { title: "Arquitetura Frontend", url: "https://www.google.com/search?q=filetype:pdf+Arquitetura+Frontend+Projetos+de+Interface" }
+                ],
                 vids: [
-                    { title: "Formatação ABNT Passo a Passo", url: "https://www.youtube.com/results?search_query=Trabalho+Academico+ABNT+Formatacao" },
-                    { title: "Arquitetura de Projetos Web", url: "https://www.youtube.com/results?search_query=Arquitetura+de+Projetos+Frontend+HTML+CSS" }
+                    { title: "Vídeo 1: Formatação ABNT Completa", url: "https://www.youtube.com/results?search_query=Trabalho+Academico+ABNT+Formatacao" },
+                    { title: "Vídeo 2: Construindo Layouts com CSS Grid", url: "https://www.youtube.com/results?search_query=CSS+Grid+Layout+Tutorial" },
+                    { title: "Vídeo 3: Boas Práticas GitHub", url: "https://www.youtube.com/results?search_query=Git+Commit+Boas+Praticas" }
                 ]
             },
             seguranca: {
-                summary: "Análise de vulnerabilidades e forense computacional. O estudo aprofundado do SHA-256, MD5 e testes práticos com o Hashcat para quebra por dicionário documentados nos seus relatórios técnicos.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Computa%C3%A7%C3%A3o+Forense+DFIR+Criptografia",
+                summary: "Cybersegurança e Forense Computacional. Estudo profundo do hash SHA-256 e MD5, além da prática de ataques baseados em dicionários documentados em relatórios técnicos.",
+                pdfs: [
+                    { title: "Guia Completo DFIR", url: "https://www.google.com/search?q=filetype:pdf+Computa%C3%A7%C3%A3o+Forense+DFIR+Criptografia" },
+                    { title: "Paper: Ataques Hashcat", url: "https://www.google.com/search?q=filetype:pdf+Hashcat+Dictionary+Attack+Tutorial" }
+                ],
                 vids: [
-                    { title: "Como funciona o algoritmo SHA-256", url: "https://www.youtube.com/results?search_query=Como+funciona+Criptografia+SHA-256" },
-                    { title: "Ataque de Dicionário Prático", url: "https://www.youtube.com/results?search_query=Hashcat+Ataque+de+Dicionario+Tutorial" }
+                    { title: "Vídeo 1: A Matemática do SHA-256", url: "https://www.youtube.com/results?search_query=Como+funciona+Criptografia+SHA-256" },
+                    { title: "Vídeo 2: Introdução ao DFIR", url: "https://www.youtube.com/results?search_query=Introdu%C3%A7%C3%A3o+a+Computa%C3%A7%C3%A3o+Forense+DFIR" },
+                    { title: "Vídeo 3: Executando o Hashcat", url: "https://www.youtube.com/results?search_query=Hashcat+Ataque+Dicionario+Pratica" }
                 ]
             },
             mentoring: {
-                summary: "Preparação intensiva para o mercado corporativo. Entendimento de soft skills, estruturação do LinkedIn e do GitHub para alcançar seu objetivo de atuar em empresas de tecnologia de ponta.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Mentoria+Carreira+Tecnologia+Soft+Skills",
+                summary: "Preparação para o Mercado. Moldar o perfil técnico, melhorar habilidades de comunicação e direcionar projetos para atrair recrutadores de tecnologia.",
+                pdfs: [
+                    { title: "Plano de Carreira em TI", url: "https://www.google.com/search?q=filetype:pdf+Mentoria+Carreira+Tecnologia+Soft+Skills" }
+                ],
                 vids: [
-                    { title: "Como destacar seu GitHub", url: "https://www.youtube.com/results?search_query=Como+deixar+o+Github+atrativo+para+recrutadores" },
-                    { title: "Soft Skills para Devs", url: "https://www.youtube.com/results?search_query=Soft+Skills+Engenharia+de+Software" }
+                    { title: "Vídeo 1: Otimizando o Perfil GitHub", url: "https://www.youtube.com/results?search_query=Como+deixar+o+Github+atrativo+para+recrutadores" },
+                    { title: "Vídeo 2: Soft Skills em Entrevistas", url: "https://www.youtube.com/results?search_query=Soft+Skills+Engenharia+de+Software" }
                 ]
             },
             psx: {
-                summary: "Horário reservado para o seu principal hobby técnico. Utilize as ferramentas de extração (jpsxdec) e edição hexadecimal (HxD) para interagir com a estrutura de arquivos ISO e descompactar os pacotes de texturas e malhas 3D.",
-                pdf: "https://www.google.com/search?q=filetype:pdf+Reverse+Engineering+PlayStation+1+ROMs",
+                summary: "Modding e Análise Binária. Utilizar o jpsxdec para extração tátil, o HxD para edição hexadecimal dos arquivos ISO e rodar a depuração visual do emulador.",
+                pdfs: [
+                    { title: "Engenharia Reversa PS1 (Ghidra)", url: "https://www.google.com/search?q=filetype:pdf+Reverse+Engineering+PlayStation+1+ROMs" },
+                    { title: "Manual Avançado HxD", url: "https://www.google.com/search?q=filetype:pdf+Hex+Editing+Games+HxD" }
+                ],
                 vids: [
-                    { title: "Extraindo Arquivos PS1 (jpsxdec)", url: "https://www.youtube.com/results?search_query=jpsxdec+PlayStation+1+Modding" },
-                    { title: "Editando Memória Dinâmica no Emulador", url: "https://www.youtube.com/results?search_query=DuckStation+Memory+Editing+Cheat+Engine" }
+                    { title: "Vídeo 1: Extração com jpsxdec", url: "https://www.youtube.com/results?search_query=jpsxdec+PlayStation+1+Modding" },
+                    { title: "Vídeo 2: Editor de Memória DuckStation", url: "https://www.youtube.com/results?search_query=DuckStation+Memory+Editing" },
+                    { title: "Vídeo 3: Hacking de Jogos Retrô", url: "https://www.youtube.com/results?search_query=Reverse+Engineering+PS1+Games" }
                 ]
             }
         };
 
         /**
-         * GERAÇÃO DOS DIAS DE FOLGA
-         * Maio (Trabalha ímpares) -> Folgas: 28, 30.
-         * Junho (Trabalha pares) -> Folgas: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29.
+         * 2. ALGORITMO DA ESCALA 12x36 E ROTINAS
          */
-        const daysOff = [
-            { id: "28_05", label: "28/05", week: "Quinta", routine: "quinta" },
-            { id: "30_05", label: "30/05", week: "Sábado", routine: "fds" },
-            { id: "01_06", label: "01/06", week: "Segunda", routine: "segunda" },
-            { id: "03_06", label: "03/06", week: "Quarta", routine: "quarta" },
-            { id: "05_06", label: "05/06", week: "Sexta", routine: "sexta" },
-            { id: "07_06", label: "07/06", week: "Domingo", routine: "fds" },
-            { id: "09_06", label: "09/06", week: "Terça", routine: "terca" },
-            { id: "11_06", label: "11/06", week: "Quinta", routine: "quinta" },
-            { id: "13_06", label: "13/06", week: "Sábado", routine: "fds" },
-            { id: "15_06", label: "15/06", week: "Segunda", routine: "segunda" },
-            { id: "17_06", label: "17/06", week: "Quarta", routine: "quarta" },
-            { id: "19_06", label: "19/06", week: "Sexta", routine: "sexta" },
-            { id: "21_06", label: "21/06", week: "Domingo", routine: "fds" },
-            { id: "23_06", label: "23/06", week: "Terça", routine: "terca" },
-            { id: "25_06", label: "25/06", week: "Quinta", routine: "quinta" },
-            { id: "27_06", label: "27/06", week: "Sábado", routine: "fds" },
-            { id: "29_06", label: "29/06", week: "Segunda", routine: "segunda" }
+        const daysOffArray = [
+            { id: "28_05", label: "28/05/2026", week: "Quinta", template: "quinta" },
+            { id: "30_05", label: "30/05/2026", week: "Sábado", template: "fds" },
+            { id: "01_06", label: "01/06/2026", week: "Segunda", template: "segunda" },
+            { id: "03_06", label: "03/06/2026", week: "Quarta", template: "quarta" },
+            { id: "05_06", label: "05/06/2026", week: "Sexta", template: "sexta" },
+            { id: "07_06", label: "07/06/2026", week: "Domingo", template: "fds" },
+            { id: "09_06", label: "09/06/2026", week: "Terça", template: "terca" },
+            { id: "11_06", label: "11/06/2026", week: "Quinta", template: "quinta" },
+            { id: "13_06", label: "13/06/2026", week: "Sábado", template: "fds" },
+            { id: "15_06", label: "15/06/2026", week: "Segunda", template: "segunda" },
+            { id: "17_06", label: "17/06/2026", week: "Quarta", template: "quarta" },
+            { id: "19_06", label: "19/06/2026", week: "Sexta", template: "sexta" },
+            { id: "21_06", label: "21/06/2026", week: "Domingo", template: "fds" },
+            { id: "23_06", label: "23/06", week: "Terça", template: "terca" },
+            { id: "25_06", label: "25/06/2026", week: "Quinta", template: "quinta" },
+            { id: "27_06", label: "27/06/2026", week: "Sábado", template: "fds" },
+            { id: "29_06", label: "29/06/2026", week: "Segunda", template: "segunda" }
         ];
 
-        /**
-         * MATRIZ DE HORÁRIOS
-         * Baseada no mapeamento rígido da escala e das aulas da PUC.
-         */
-        const routinesData = {
+        const routineTemplates = {
             segunda: [
-                { time: "07h30 - 08h30", title: "Inicialização do Sistema Biológico", type: "academic", desc: "Despertar, café da manhã substancial e organização da mesa.", res: null },
-                { time: "08h30 - 11h00", title: "Arquitetura e Organização de Comp. II", type: "academic", desc: "Bloco denso de absorção teórica antes da faculdade.", res: studyResources.arq },
-                { time: "11h00 - 12h30", title: "Trabalho Acadêmico Integrado I", type: "academic", desc: "Avanço estrutural nas normas ABNT.", res: studyResources.tai },
-                { time: "14h30 - 17h00", title: "Laboratório Livre: Eng. Reversa de Jogos", type: "practical", desc: "Prática intensiva no setup.", res: studyResources.psx },
-                { time: "19h00 - 22h30", title: "Aulas Presenciais (PUC Minas)", type: "academic", desc: "19h: Arq e Org II | 21h: TAI I", res: null }
+                { time: "08h00 - 10h30", title: "Arquitetura e Organização de Comp. II", type: "academic", desc: "Preparação teórica matinal sobre hardware e processamento.", res: studyResources.arqOrg },
+                { time: "11h00 - 12h30", title: "Trabalho Acadêmico Integrado I", type: "academic", desc: "Pesquisa, redação e adequação de formatação.", res: studyResources.tai },
+                { time: "14h30 - 17h00", title: "Lab: Engenharia Reversa (PSX)", type: "practical", desc: "Aplicação tátil de modding no setup local.", res: studyResources.psx },
+                { time: "19h00 - 22h30", title: "Sessão Letiva Presencial (PUC Minas)", type: "academic", desc: "Aulas: Arq e Org II (19h) | TAI I (21h).", res: null }
             ],
             terca: [
-                { time: "07h30 - 08h30", title: "Inicialização do Sistema Biológico", type: "academic", desc: "Alongamento e preparo do ambiente.", res: null },
-                { time: "08h30 - 11h00", title: "Lab. Arquitetura e Organização de Comp. II", type: "academic", desc: "Sessão prática focada em Assembly.", res: studyResources.labArq },
-                { time: "11h00 - 12h30", title: "Filosofia Razão e Modernidade", type: "academic", desc: "Fichamento e resumos conceituais.", res: studyResources.filosofia },
-                { time: "14h30 - 17h00", title: "Laboratório Livre: Eng. Reversa de Jogos", type: "practical", desc: "Mapeamento hexadecimal de binários.", res: studyResources.psx },
-                { time: "19h00 - 22h30", title: "Aulas Presenciais (PUC Minas)", type: "academic", desc: "19h: Lab Arq e Org II | 21h: Filosofia", res: null }
+                { time: "08h00 - 10h30", title: "Lab. Arquitetura e Organização de Comp. II", type: "academic", desc: "Teste de comandos lógicos MIPS e execução visual.", res: studyResources.labArq },
+                { time: "11h00 - 12h30", title: "Filosofia Razão e Modernidade", type: "academic", desc: "Fichamento e construção argumentativa dos textos base.", res: studyResources.filosofia },
+                { time: "14h30 - 17h00", title: "Lab: Engenharia Reversa (PSX)", type: "practical", desc: "Identificação de variáveis na memória hexadecimal.", res: studyResources.psx },
+                { time: "19h00 - 22h30", title: "Sessão Letiva Presencial (PUC Minas)", type: "academic", desc: "Aulas: Lab Arq e Org II (19h) | Filosofia (21h).", res: null }
             ],
             quarta: [
-                { time: "07h30 - 08h30", title: "Inicialização do Sistema Biológico", type: "academic", desc: "Revisão dos logs da semana.", res: null },
-                { time: "08h30 - 11h00", title: "Arquitetura e Organização de Comp. II", type: "academic", desc: "Consolidação de memória em tópicos de pipeline.", res: studyResources.arq },
-                { time: "11h00 - 12h30", title: "Trabalho Acadêmico Integrado II", type: "academic", desc: "Desenvolvimento da interface Web.", res: studyResources.tai },
-                { time: "14h30 - 17h00", title: "Laboratório Livre: Eng. Reversa de Jogos", type: "practical", desc: "Aplicação prática e modding de texturas.", res: studyResources.psx },
-                { time: "19h00 - 22h30", title: "Aulas Presenciais (PUC Minas)", type: "academic", desc: "19h: Arq e Org II | 21h: TAI II", res: null }
+                { time: "08h00 - 10h30", title: "Arquitetura e Organização de Comp. II", type: "academic", desc: "Aprofundamento na teoria de mapeamento e barramentos.", res: studyResources.arqOrg },
+                { time: "11h00 - 12h30", title: "Trabalho Acadêmico Integrado II", type: "academic", desc: "Codificação Front-End, lógica JS e controle de versão.", res: studyResources.tai },
+                { time: "14h30 - 17h00", title: "Lab: Engenharia Reversa (PSX)", type: "practical", desc: "Desmontagem (Disassembly) de trechos executáveis no Ghidra.", res: studyResources.psx },
+                { time: "19h00 - 22h30", title: "Sessão Letiva Presencial (PUC Minas)", type: "academic", desc: "Aulas: Arq e Org II (19h) | TAI II (21h).", res: null }
             ],
             quinta: [
-                { time: "07h30 - 08h30", title: "Inicialização do Sistema Biológico", type: "academic", desc: "Despertar focado.", res: null },
-                { time: "08h30 - 11h30", title: "Segurança e Criptografia DFIR", type: "academic", desc: "Sessão intensiva de estudo sobre Hashes e Forense.", res: studyResources.seguranca },
-                { time: "14h30 - 17h00", title: "Laboratório Livre: Eng. Reversa de Jogos", type: "practical", desc: "Trabalho avançado com Ghidra.", res: studyResources.psx },
-                { time: "19h00 - 22h30", title: "Janela e Aula (PUC Minas)", type: "academic", desc: "19h: Janela Livre/Descanso | 21h: Segurança e Criptografia DFIR", res: null }
+                { time: "08h00 - 11h30", title: "Segurança e Criptografia DFIR", type: "academic", desc: "Prática de Força Bruta e Dicionários para recuperação de Hashes.", res: studyResources.seguranca },
+                { time: "14h30 - 17h00", title: "Lab: Engenharia Reversa (PSX)", type: "practical", desc: "Empacotamento de arquivos modificados e testes visuais.", res: studyResources.psx },
+                { time: "19h00 - 20h40", title: "Janela Livre (Descanso Cognitivo)", type: "practical", desc: "Período vago na grade da PUC. Realizar relaxamento visual absoluto.", res: null },
+                { time: "21h00 - 22h30", title: "Sessão Letiva Presencial (PUC Minas)", type: "academic", desc: "Aula de Segurança e Criptografia de Dados DFIR.", res: null }
             ],
             sexta: [
-                { time: "07h30 - 08h30", title: "Inicialização do Sistema Biológico", type: "academic", desc: "Dia focado em fechamentos.", res: null },
-                { time: "08h30 - 11h30", title: "Desenvolvimento de Carreira", type: "academic", desc: "Preparação de portfólio GitHub e Soft Skills.", res: studyResources.mentoring },
-                { time: "14h30 - 17h00", title: "Laboratório Livre: Eng. Reversa de Jogos", type: "practical", desc: "Execução no DuckStation em 144Hz para testes visuais do modding.", res: studyResources.psx },
-                { time: "19h00 - 20h40", title: "Aula Online (Em Casa)", type: "academic", desc: "19h: Mentoring III", res: null }
+                { time: "08h00 - 10h30", title: "Mentoring III & Carreira", type: "academic", desc: "Ajuste de portfólio GitHub, mapeamento de vagas tech.", res: studyResources.mentoring },
+                { time: "11h00 - 12h30", title: "Sprints Code & Review (TAI)", type: "academic", desc: "Comitar alterações finais dos projetos TAI na nuvem.", res: studyResources.tai },
+                { time: "14h30 - 17h00", title: "Lab: Engenharia Reversa (PSX)", type: "practical", desc: "Sessão de documentação do mod desenvolvido na semana.", res: studyResources.psx },
+                { time: "19h00 - 20h40", title: "Aula Online: Mentoring III", type: "academic", desc: "Conectar na aula remota através do computador.", res: null }
             ],
             fds: [
-                { time: "09h00 - 10h00", title: "Boot Controlado (Recuperação)", type: "academic", desc: "Recuperação de horas de sono para regeneração do sistema nervoso central.", res: null },
-                { time: "10h00 - 13h00", title: "Imersão Total: Eng. Reversa de PSX", type: "practical", desc: "Bloco sem interrupções dedicado puramente ao seu hobby tecnológico avançado.", res: studyResources.psx },
-                { time: "15h00 - 17h00", title: "Otimização Acadêmica / TAI", type: "academic", desc: "Refatoração de código de interface ou finalização de documentos ABNT.", res: studyResources.tai },
-                { time: "18h00 - 21h00", title: "Shutdown & Logística", type: "academic", desc: "Fim do expediente cognitivo. Preparar fardamento de vigia e alimentação para o plantão de domingo/segunda.", res: null }
+                { time: "09h00 - 12h00", title: "Imersão de Hardware: Eng. Reversa", type: "practical", desc: "Uso longo dedicado integralmente ao PS1, HxD e Ghidra, sem interrupções.", res: studyResources.psx },
+                { time: "14h00 - 17h00", title: "Estudos Livres e Prática", type: "academic", desc: "Refatoração de projetos Web ou revisão de comandos em MIPS.", res: studyResources.labArq },
+                { time: "18h00 - 21h00", title: "Desligamento e Logística (Escala)", type: "practical", desc: "Preparar o ambiente, uniforme e refeições para o plantão 12x36 iminente.", res: null }
             ]
         };
 
-        // Manipulação do DOM (Inicialização Principal)
+        /**
+         * 3. INICIALIZAÇÃO DE EVENTOS E MANIPULAÇÃO DO DOM
+         */
         document.addEventListener('DOMContentLoaded', () => {
-            initModal();
-            initTabs();
-            buildDaysTrack();
-            initPomodoro();
-            fetchMotivation();
+            initNativeModal();
+            initTabNavigation();
+            buildDaysCarousel();
+            initPomodoroEngine();
+            fetchServerAdvice();
         });
 
-        // 1. Modais Nativos
-        function initModal() {
+        // Controle do Elemento Nativo <dialog>
+        function initNativeModal() {
             const dialog = document.getElementById('welcomeDialog');
             const btnClose = document.getElementById('btnCloseDialog');
             dialog.showModal();
             btnClose.addEventListener('click', () => dialog.close());
         }
 
-        // 2. Navegação Lateral (Event Listeners e Data Attributes)
-        function initTabs() {
+        // Sistema de abas baseado em Data Attributes (Semântico e invisível ao usuário)
+        function initTabNavigation() {
             const navBtns = document.querySelectorAll('.nav-btn');
             const panels = document.querySelectorAll('.panel-view');
 
@@ -672,90 +680,91 @@
                     
                     navBtns.forEach(b => b.setAttribute('data-state', 'inactive'));
                     e.currentTarget.setAttribute('data-state', 'active');
-
+                    
                     panels.forEach(panel => {
-                        if (panel.id === target) {
-                            panel.setAttribute('data-state', 'active');
-                        } else {
-                            panel.setAttribute('data-state', 'inactive');
-                        }
+                        panel.setAttribute('data-state', panel.id === target ? 'active' : 'inactive');
                     });
                 });
             });
         }
 
-        // 3. Renderização Dinâmica do Cronograma
-        function buildDaysTrack() {
+        // Geração do Carousel Horizontal Dinâmico
+        function buildDaysCarousel() {
             const container = document.getElementById('daysTrackContainer');
             
-            daysOff.forEach((day, idx) => {
-                const btn = document.createElement('div');
-                btn.className = 'day-tab';
-                btn.setAttribute('data-id', day.id);
-                btn.setAttribute('data-selected', idx === 0 ? 'true' : 'false');
-                btn.innerHTML = `<span style="display:block; font-weight:700; font-size:1.1rem; color:var(--text-primary)">${day.label}</span>
-                                 <span style="font-size:0.8rem; color:var(--text-secondary)">${day.week}</span>`;
+            daysOffArray.forEach((day, idx) => {
+                const tab = document.createElement('div');
+                tab.className = 'day-tab';
+                tab.setAttribute('data-id', day.id);
+                tab.setAttribute('data-selected', idx === 0 ? 'true' : 'false');
+                tab.innerHTML = `
+                    <span style="display:block; font-weight:700; font-size:1.1rem; color:var(--text-primary)">${day.label.substring(0,5)}</span>
+                    <span style="font-size:0.85rem; color:var(--text-secondary)">${day.week}</span>
+                `;
                 
-                btn.addEventListener('click', () => {
+                tab.addEventListener('click', () => {
                     document.querySelectorAll('.day-tab').forEach(b => b.setAttribute('data-selected', 'false'));
-                    btn.setAttribute('data-selected', 'true');
-                    renderTimeline(day);
+                    tab.setAttribute('data-selected', 'true');
+                    renderTimelineBlocks(day);
                 });
 
-                container.appendChild(btn);
+                container.appendChild(tab);
             });
 
-            // Carrega o primeiro dia por padrão
-            renderTimeline(daysOff[0]);
+            // Auto-renderiza o primeiro dia
+            renderTimelineBlocks(daysOffArray[0]);
         }
 
-        function renderTimeline(dayObj) {
+        // Renderização dos Cards com Dados Estruturados
+        function renderTimelineBlocks(dayObj) {
             const header = document.getElementById('currentDateHeader');
             const list = document.getElementById('timelineList');
             
-            header.innerText = `Protocolo Carregado — ${dayObj.label} (${dayObj.week})`;
+            header.innerText = `Protocolo Compilado — ${dayObj.label}`;
             list.innerHTML = '';
 
-            const blocks = routinesData[dayObj.routine];
+            const blocks = routineTemplates[dayObj.template];
 
             blocks.forEach((block, idx) => {
                 const card = document.createElement('div');
                 card.className = 'study-card';
                 card.setAttribute('data-type', block.type);
-                card.style.animationDelay = `${idx * 0.1}s`;
+                // Aplica delay cascata na animação
+                card.style.animationDelay = `${idx * 0.15}s`;
 
                 let resourcesHtml = '';
 
-                // Geração dinâmica dos links (PDF + Múltiplos Videos + Resumo)
+                // Se houver links associados no banco de dados para a matéria
                 if (block.res) {
-                    let ytButtons = '';
+                    let pdfLinksStr = '';
+                    block.res.pdfs.forEach(p => {
+                        pdfLinksStr += `<a href="${p.url}" target="_blank" class="resource-btn btn-pdf">📄 ${p.title}</a>`;
+                    });
+
+                    let ytLinksStr = '';
                     block.res.vids.forEach(v => {
-                        ytButtons += `<a href="${v.url}" target="_blank" class="resource-btn btn-yt">▶️ ${v.title}</a>`;
+                        ytLinksStr += `<a href="${v.url}" target="_blank" class="resource-btn btn-yt">▶️ ${v.title}</a>`;
                     });
 
                     resourcesHtml = `
                         <div class="card-summary">
-                            <strong>Resumo Tático:</strong> ${block.res.summary}
+                            <strong>Visão Geral:</strong> ${block.res.summary}
                         </div>
-                        <div class="material-links">
-                            <div class="link-group">
-                                <h4>📚 Material Base</h4>
-                                <a href="${block.res.pdf}" target="_blank" class="resource-btn btn-pdf">📄 Acessar Literatura / PDF Oficial</a>
-                            </div>
-                            <div class="link-group" style="margin-top: 12px;">
-                                <h4>📺 Aulas e Execuções Práticas</h4>
-                                <div class="link-row">
-                                    ${ytButtons}
-                                </div>
-                            </div>
+                        <div class="link-group">
+                            <h4>📚 Literatura e Documentos Base (PDF)</h4>
+                            <div class="link-row">${pdfLinksStr}</div>
+                        </div>
+                        <div class="link-group">
+                            <h4>📺 Referências Visuais Múltiplas (YouTube)</h4>
+                            <div class="link-row">${ytLinksStr}</div>
                         </div>
                     `;
                 }
 
                 card.innerHTML = `
                     <div class="time-badge">⏱ ${block.time}</div>
-                    <h4 class="card-title">${block.title}</h4>
-                    <p style="color: var(--text-secondary); margin-bottom: 12px;">${block.desc}</p>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 12px; color: var(--text-primary);">${block.title}</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">${block.desc}</p>
                     ${resourcesHtml}
                 `;
 
@@ -763,18 +772,21 @@
             });
         }
 
-        // 4. Lógica do Pomodoro Integrado e Local Storage
-        function initPomodoro() {
+        /**
+         * 4. BANCO DE DADOS LOCAL (LocalStorage) E TIMER
+         * Persistência de estado para evitar perda ao atualizar a página.
+         */
+        function initPomodoroEngine() {
             let timerId = null;
-            let timeRemaining = 50 * 60; // 50 minutos
+            let timeRemaining = 50 * 60; // 50 min em segundos
             
             const display = document.getElementById('timerOutput');
             const btnStart = document.getElementById('btnStartTimer');
             const btnReset = document.getElementById('btnResetTimer');
             const focusStat = document.getElementById('focusMinutes');
 
-            // Persistência via Local Storage
-            let totalMinutes = parseInt(localStorage.getItem('sysAgentFocusTime')) || 0;
+            // Carrega estado do disco (navegador)
+            let totalMinutes = parseInt(localStorage.getItem('sysAgentFocusDB')) || 0;
             focusStat.innerText = totalMinutes;
 
             function updateDisplay() {
@@ -785,22 +797,24 @@
 
             btnStart.addEventListener('click', () => {
                 if (timerId) return;
-                btnStart.innerText = 'Em Foco Profundo...';
+                btnStart.innerText = 'Compilando Foco...';
                 btnStart.style.opacity = '0.7';
 
                 timerId = setInterval(() => {
                     timeRemaining--;
                     updateDisplay();
 
+                    // Disparo do alarme ao fim do ciclo
                     if (timeRemaining <= 0) {
                         clearInterval(timerId);
                         timerId = null;
                         
+                        // Incrementa o log e salva
                         totalMinutes += 50;
-                        localStorage.setItem('sysAgentFocusTime', totalMinutes);
+                        localStorage.setItem('sysAgentFocusDB', totalMinutes);
                         focusStat.innerText = totalMinutes;
 
-                        alert('Bloco processado com sucesso! Levante-se, beba água e faça 10 minutos de pausa absoluta (longe do monitor 144Hz).');
+                        alert('Processo concluído. Aplique a Evocação Ativa. Explique o que aprendeu, levante-se e inicie o descanso ocular longe do monitor.');
                         
                         timeRemaining = 50 * 60;
                         updateDisplay();
@@ -820,17 +834,21 @@
             });
         }
 
-        // 5. Consumo de API Externa (Fetch API nativa)
-        async function fetchMotivation() {
+        /**
+         * 5. ROTINA ASSÍNCRONA E FETCH API (Consumo Externo)
+         */
+        async function fetchServerAdvice() {
             const apiContainer = document.getElementById('apiMotivation');
             try {
-                // Endpoint público seguro para dicas randômicas (Advice Slip JSON API)
+                // Chamada GET para API pública geradora de strings
                 const response = await fetch('https://api.adviceslip.com/advice');
+                if (!response.ok) throw new Error('Network response failure');
                 const data = await response.json();
-                apiContainer.innerHTML = `"${data.slip.advice}" <br><br><span style="color: var(--accent-primary); font-weight: bold;">— Processamento em Nuvem Concluído</span>`;
+                
+                apiContainer.innerHTML = `"${data.slip.advice}" <br><br><span style="color: var(--accent-primary); font-weight: 600; font-size: 0.85rem;">— GET /advice (Status: 200 OK)</span>`;
             } catch (error) {
-                console.error('Falha na API de conselhos:', error);
-                apiContainer.innerHTML = "Sistemas offline. Lembre-se: Motivação falha na escala 12x36. Apenas o sistema de hábitos e a disciplina prevalecem. Inicie seu bloco de código.";
+                console.error('Fetch Log:', error);
+                apiContainer.innerHTML = "Servidor remoto inoperante. Utilize a persistência do seu cronograma local. O sucesso depende da constância da execução do algoritmo, não de motivação externa.";
             }
         }
     </script>
