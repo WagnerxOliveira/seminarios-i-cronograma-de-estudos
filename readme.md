@@ -36,4 +36,4 @@ Sendo uma aplicação estática *client-side*, a execução é imediata e não r
 
 1. Faça o clone do repositório:
    ```bash
-   git clone [https://github.com/WagnerxOliveira/SysAgent.git](https://github.com/wagnerxoliveira/SysAgent.git)
+   git clone [https://github.com/WagnerxOliveira/SysAgent.git](https://github.com/WagnerxOliveira/seminarios-i-cronograma-de-estudos.git)
